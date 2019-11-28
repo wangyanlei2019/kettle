@@ -1,0 +1,10 @@
+#win系统
+#kettle:
+#    job: F://kc//zuoye.kjb
+#    trans: F://kc//DEMO.ktr
+#linux系统
+kettle:
+    job: /usr/kettle/springboot/zuoye.kjb
+    trans: /usr/kettle/springboot/DEMO.ktr
+logging:
+    config: classpath:logback-spring.xml

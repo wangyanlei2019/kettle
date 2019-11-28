@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-3.0.0.min.js"></script>
+</head>
+
+<body>
+<button type="button" name="submitTrans" id="submitTrans">运行转换</button>
+<button type="button" name="submitJob" id="submitJob">运行作业</button>
+<div id="loading"></div>
+</body>
+<script type="text/javascript">
+
+
+    $("#submitTrans").click(function() {
+        $("#submitTrans").attr('disabled',true);
+        $.ajax({
+            url: "/runTrans",
+            dataType: "json",
+            type: "post",
+            data: null,
+            beforeSend:function(){
+                $("#loading").html("<img src='image/loading.gif' />"); //在请求后台数据之前显示loading图标
+            },
+            success: function(result) {
+                $("#submitTrans").attr('disabled',false);
+                $("#loading").empty(); //ajax返回成功，清除loading图标
+                alert(result.message);
+            },
+            error: function(result) {
+                $("#submitTrans").attr('disabled',false);
+                alert(result.message)
+            }
+        });
+    });
+
+    $("#submitJob").click(function() {
+        $("#submitJob").attr('disabled',true);
+        $.ajax({
+            url: "/runJob",
+            dataType: "json",
+            type: "post",
+            data: null,
+            beforeSend:function(){
+                $("#loading").html("<img src='image/loading.gif' />"); //在请求后台数据之前显示loading图标
+            },
+            success: function(result) {
+                $("#submitJob").attr('disabled',false);
+                $("#loading").empty(); //ajax返回成功，清除loading图标
+                alert(result.message);
+            },
+            error: function(result) {
+                $("#submitJob").attr('disabled',false);
+                alert(result.message)
+            }
+        });
+    });
+</script>
+</html>
