@@ -1,10 +1,13 @@
 #win系统
-#kettle:
-#    job: F://kc//zuoye.kjb
-#    trans: F://kc//DEMO.ktr
-#linux系统
 kettle:
-    job: /usr/kettle/springboot/zuoye.kjb
-    trans: /usr/kettle/springboot/DEMO.ktr
+    job: F://kc//zuoye.kjb
+    trans: F://kc//DEMO.ktr
+#linux系统
+#kettle:
+#    job: /usr/local/kettle/zuoye.kjb
+#    trans: /usr/local/kettle/DEMO.ktr
 logging:
     config: classpath:logback-spring.xml
+server:
+    #端口号
+    port: 8888
