@@ -2,7 +2,9 @@
 <configuration>
 
     <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
-    <property name="LOG_PATTERN" value=" %red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %cyan(%logger) - (%msg%n)"/>
+    <property name="LOG_PATTERN" value=" %red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %highlight(%-5level) %cyan(%logger) -%msg%n)"/>
+    <property name="LOG_OUT" value="%d{yyyy-MM-dd HH:mm:ss} [%p][%c][%M][%L]-> %m%n"/>
+
     <!-- 定义日志存储的路径，不要配置相对路径 -->
     <property name="FILE_PATH" value="${user.home}/logs/kettle.%d{yyyy-MM-dd}.%i.log" />
 
@@ -13,6 +15,7 @@
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
+
 
     <!--每天生成一个日志文件，保存15天的日志文件。rollingFile是用来切分文件的 -->
     <appender name="FILE"
@@ -26,9 +29,8 @@
                 <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
-
         <encoder>
-            <pattern>${LOG_PATTERN}</pattern>
+            <pattern>${LOG_OUT}</pattern>
         </encoder>
     </appender>
     <!-- project default level -->

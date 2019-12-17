@@ -1,5 +1,4 @@
 package com.wang.kettle.service;
-
 import org.pentaho.di.core.KettleEnvironment;
 import org.pentaho.di.core.exception.KettleException;
 import org.pentaho.di.core.exception.KettleXMLException;
@@ -9,11 +8,10 @@ import org.pentaho.di.trans.Trans;
 import org.pentaho.di.trans.TransMeta;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-
 @Service
 public class KettleService {
-    public  void runJob(String jobname) {
+    public  Boolean runJob(String jobname) {
+        Boolean flag=true;
       try {
             KettleEnvironment.init();
             // jobname 是Job脚本的路径及名称
@@ -27,12 +25,15 @@ public class KettleService {
                 System.out.println("decompress fail!");
             }
         } catch (KettleException e) {
+             flag=false;
             System.out.println(e);
         }
+      return flag;
     }
 
     // 调用Transformation示例：
-    public void runTrans(String filename) {
+    public Boolean runTrans(String filename) {
+        Boolean flag=true;
         try {
             KettleEnvironment.init();
             TransMeta transMeta = new TransMeta(filename);
@@ -44,18 +45,12 @@ public class KettleService {
                 System.out.println("Error");
             }
         } catch (KettleXMLException e) {
-            // TODO Auto-generated catch block
+            flag=false;
             e.printStackTrace();
         } catch (KettleException e) {
-            // TODO Auto-generated catch block
+            flag=false;
             e.printStackTrace();
         }
+        return flag;
     }
-
-//    public static void main(String[] args) {
-////        String jobname = "F:\\ETL\\kettle\\例子\\测试\\复制多表\\copymanytablejob.kjb";
-////        runJob(jobname);
-//        String filename="F:\\kc\\DEMO.ktr";
-//        runTrans(filename);
-//    }
 }
